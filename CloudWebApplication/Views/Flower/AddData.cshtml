@@ -1,0 +1,41 @@
+﻿@model CloudWebApplication.Models.Flower
+
+<center>
+	<h1>Add New Flower:</h1>
+	<form asp-action="AddData" asp-controller="Flower" method="post">
+		<table>
+			<tr>
+				<th><label asp-for="flowerName"></label> </th>
+				<td><input asp-for="flowerName" required /></td>
+				<td><span asp-validation-for="flowerName"></span></td>
+			</tr>
+			<tr>
+				<th><label asp-for="flowerType"></label> </th>
+				<td><input asp-for="flowerType" required /></td>
+				<td><span asp-validation-for="flowerType"></span></td>
+			</tr>
+			<tr>
+				<th><label asp-for="flowerProducedDate"></label> </th>
+				<td><input asp-for="flowerProducedDate" required /></td>
+				<td><span asp-validation-for="flowerProducedDate"></span></td>
+			</tr>
+			<tr>
+				<th><label asp-for="flowerPrice"></label> </th>
+				<td><input asp-for="flowerPrice" required /></td>
+				<td><span asp-validation-for="flowerPrice"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" name="submit" value="Add Data to table" />
+				</td>
+			</tr>
+		</table>
+
+	</form>
+
+</center>
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿
+@model List<Flower>
+<center>
+    <h1>Flowers List Information:</h1>
+    <br />
+    <table border="1"> 
+        <tr style="background-color: yellow;"> 
+            <th>Flower ID</th>
+            <th>Flower Name</th>
+            <th>Flower Type</th>
+            <th>Flower Produced Date</th>
+            <th>Flower Price</th>
+            <th>Delete Action</th>
+            <th>Update Action</th> 
+        </tr> 
+        @foreach (var flower in Model)
+        {
+        <tr> 
+            <td>@flower.flowerID</td> 
+            <td>@flower.flowerName</td>
+            <td>@flower.flowerType</td>
+            <td>@flower.flowerProducedDate</td> 
+            <td>@flower.flowerPrice</td> 
+            <form asp-action="DeleteData" asp-controller="Flowers" asp-route-fid="@flower.flowerID"> <td><button>Delete</button></td> <td><button asp-action="EditData" asp-controller="Flowers" asp-route-fid="@flower.flowerID">Edit</button></td>
+                </form> 
+        </tr>
+        } 
+        </table>
+    <p><a asp-action="AddData" asp-controller="Flowers">Insert New Flower</a></p>
+</center>
+
