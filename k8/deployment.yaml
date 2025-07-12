@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudwebapplication-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudwebapplication
+  template:
+    metadata:
+      labels:
+        app: cloudwebapplication
+    spec:
+      containers:
+      - name: cloudwebapplication
+        image: 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+        ports:
+        - containerPort: 8080
