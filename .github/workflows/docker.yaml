@@ -1,12 +1,12 @@
-name: Build and Push Docker Image to ECR
+name: Build and Push Docker Image to ECR & Apply changes to EKS
 
 on:
   push:
     branches:
-      - master  
+      - master 
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,3 +32,21 @@ jobs:
 
     - name: Push to ECR
       run: docker push 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+
+    - name: Set up kubectl
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: us-east-1
+        aws-output: json
+
+    - name: Configure kubectl to use EKS
+      run: |
+        aws eks update-kubeconfig --name CloudSync-Cluster --region us-east-1
+
+    - name: Deploy to EKS
+      run: |
+        kubectl apply -f k8/deployment.yaml
+        kubectl apply -f k8/service.yaml
