@@ -19,7 +19,7 @@ jobs:
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
         aws configure set region us-east-1
-        aws configure set ouput json
+        aws configure set output json
 
     - name: Login to ECR (Manual Method)
       run: |
