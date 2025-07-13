@@ -15,11 +15,13 @@ jobs:
 
     - name: Configure AWS CLI
       run: |
-        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set region us-east-1
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+         AWS_REGION: us-east-1
+         AWS_OUTPUT: json
 
-    - name: Login to ECR (Manual Method)
+    - name: Login to ECR 
       run: |
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 988732826295.dkr.ecr.us-east-1.amazonaws.com
 
