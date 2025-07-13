@@ -11,24 +11,23 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Configure AWS CLI
       run: |
-        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
-        aws configure set region us-east-1
-        aws configure set output json
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile learner
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile learner
+        [ -z "${{ secrets.AWS_SESSION_TOKEN }}" ] || aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }} --profile learner
+        aws configure set region us-east-1 --profile learner
 
     - name: Login to ECR 
       run: |
-        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 988732826295.dkr.ecr.us-east-1.amazonaws.com
+        echo "${{ secrets.MANUAL_ECR_TOKEN }}" | docker login --username AWS --password-stdin 988732826295.dkr.ecr.us-east-1.amazonaws.com
 
-    - name: Build and tag Docker image
+    - name: Build and Tag Docker image
       run: |
-        docker build -t cloudsync-webapp -f CloudWebApplication/Dockerfile .
-        docker tag cloudsync-webapp:latest 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+        docker build -t 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp -f CloudWebApplication/Dockerfile .
+        docker tag 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
     - name: Push to ECR
       run: docker push 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
