@@ -29,6 +29,7 @@ jobs:
       run: |
         docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
         docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+        trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL cloudsync/webapp:latest
 
     - name: Push to ECR
       run: docker push 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
