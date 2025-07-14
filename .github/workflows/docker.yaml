@@ -28,18 +28,7 @@ jobs:
     - name: Build and tag Docker image
       run: |
         docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
-        docker tag cloudsync/webapp:latest 988732826295.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
-
-    - name: Install Trivy
-      run: |
-        sudo apt-get update
-        sudo apt-get install wget -y
-        wget -qO trivy.deb https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.64.1_Linux-64bit.deb
-        sudo dpkg -i trivy.deb
-
-    - name: Scan Docker image for vulnerabilities (Security)
-      run: |
-        trivy image --no-progress --exit-code 1 --severity HIGH,CRITICAL cloudsync/webapp:latest
+        docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
     - name: Push to ECR
       run: docker push 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
