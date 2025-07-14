@@ -27,7 +27,7 @@ jobs:
 
     - name: Build and tag Docker image
       run: |
-        docker build -t cloudsync-webapp -f CloudWebApplication/Dockerfile .
+        docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
         docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
     - name: Push to ECR
