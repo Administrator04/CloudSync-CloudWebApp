@@ -1,9 +1,13 @@
-﻿@model CloudWebApplication.Models.Flower
+﻿@{
+	ViewData["Title"] = "Modify Flower";
+}
+
+@model CloudWebApplication.Models.Flower
 
 <center>
-	<h1>Add New Flower:</h1>
+	<h1>Modify Existing Flower:</h1>
 	<form asp-action="UpdateData" asp-controller="Flower" method="post">
-		<input type="hidden" asp-for="flowerID" /> <!-- This ensures flower.Id is passed -->
+		<input type="hidden" asp-for="flowerID" /> 
 		<table>
 			<tr>
 				<th><label asp-for="flowerName"></label> </th>
