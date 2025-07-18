@@ -86,8 +86,7 @@ namespace CloudWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Use flower.Id (passed from the hidden form field) instead of undefined 'fid'
-                var existingFlower = await context.Flower.FindAsync(flower.flowerID); // Changed fid → flower.Id
+                var existingFlower = await context.Flower.FindAsync(flower.flowerID); 
                 if (existingFlower == null)
                 {
                     return NotFound();
