@@ -21,8 +21,9 @@
             <td>@flower.flowerType</td>
             <td>@flower.flowerProducedDate</td> 
             <td>@flower.flowerPrice</td> 
-            <form asp-action="DeleteData" asp-controller="Flowers" asp-route-fid="@flower.flowerID"> <td><button>Delete</button></td> <td><button asp-action="EditData" asp-controller="Flowers" asp-route-fid="@flower.flowerID">Edit</button></td>
-                </form> 
+            <form asp-action="DeleteData" asp-controller="Flower" asp-route-fid="@flower.flowerID"> <td><button>Delete</button></td> 
+                <td><button asp-action="EditData" asp-controller="Flower" asp-route-fid="@flower.flowerID">Edit</button></td>
+            </form> 
         </tr>
         } 
         </table>
