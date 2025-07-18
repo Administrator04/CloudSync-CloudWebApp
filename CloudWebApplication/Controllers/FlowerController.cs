@@ -79,5 +79,18 @@ namespace CloudWebApplication.Controllers
             }
             return View(flower);
         }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> UpdateData(Flower flower)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Update(flower); 
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(flower);
+        }
     }
 }
