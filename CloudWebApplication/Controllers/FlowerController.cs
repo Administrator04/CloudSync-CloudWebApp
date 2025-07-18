@@ -86,11 +86,22 @@ namespace CloudWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Update(flower); 
+                // Use flower.Id (passed from the hidden form field) instead of undefined 'fid'
+                var existingFlower = await context.Flower.FindAsync(flower.flowerID); // Changed fid → flower.Id
+                if (existingFlower == null)
+                {
+                    return NotFound();
+                }
+
+                existingFlower.flowerName = flower.flowerName;
+                existingFlower.flowerType = flower.flowerType;
+                existingFlower.flowerProducedDate = flower.flowerProducedDate;
+                existingFlower.flowerPrice = flower.flowerPrice;
+
                 await context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            return View(flower);
+            return View("EditData", flower);
         }
     }
 }
