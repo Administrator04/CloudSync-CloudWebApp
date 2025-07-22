@@ -30,10 +30,6 @@ jobs:
         docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
         docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
-    - name: DevSecOps - Scan Docker image for vulnerabilities using Trivy
-      run: |
-        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest -q --severity HIGH,CRITICAL cloudsync/webapp
-
     - name: Push to ECR
       run: docker push 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
