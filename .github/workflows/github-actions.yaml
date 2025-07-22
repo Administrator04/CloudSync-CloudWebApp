@@ -53,8 +53,9 @@ jobs:
 
     - name: DevSecOps - Scan Kubernetes manifests (e.g., deployment.yaml) for security issues
       run: |
-        kubectl apply -f k8/deployment.yaml --dry-run=client | kube-score score
-        
+        kubectl apply -f k8/deployment.yaml --dry-run=client -o yaml > deployment-dry-run.yaml
+        kube-score score deployment-dry-run.yaml
+
     - name: Delete and Redeploy to EKS (deployment.yaml)
       run: |
         kubectl delete -f k8/deployment.yaml || true
