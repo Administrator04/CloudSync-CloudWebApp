@@ -3,7 +3,7 @@ name: Build and Push Docker Image to ECR & Apply changes to EKS (CI/CD Pipeline)
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   build_and_deploy:
@@ -30,6 +30,10 @@ jobs:
         docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
         docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
+    - name: DevSecOps - Scan Docker image for vulnerabilities using Trivy
+      run: |
+        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest --no-progress --exit-code 1 --severity HIGH,CRITICAL cloudsync/webapp
+
     - name: Push to ECR
       run: docker push 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
@@ -46,15 +50,18 @@ jobs:
       run: |
         aws eks update-kubeconfig --name CloudSync-Cluster --region us-east-1
 
+    - name: DevSecOps - Scan Kubernetes manifests (e.g., deployment.yaml) for security issues
+      run: |
+        kubectl apply -f k8/deployment.yaml --dry-run=client | kube-score score
+
     - name: Delete and Redeploy to EKS (deployment.yaml)
       run: |
         kubectl delete -f k8/deployment.yaml || true
         kubectl apply -f k8/deployment.yaml
         kubectl apply -f k8/service.yaml
 
-    - name: Check Cluster Nodes,Deployment,Services
+    - name: Check Cluster Nodes, Deployment, Services
       run: |
         kubectl get nodes
         kubectl get deployment
         kubectl get services
-
