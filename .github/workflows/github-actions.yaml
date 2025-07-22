@@ -13,13 +13,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        languages: 'csharp'  
-
-    - name: Perform CodeQL analysis
-      uses: github/codeql-action/analyze@v2
+    # DevSecOps Addition 1 - .NET Security
+    - name: Run .NET Security Scan
+      run: |
+        dotnet restore
+        dotnet list package --vulnerable --include-transitive || true
+        dotnet tool install --global SecurityCodeScan --version 5.6.0
+        security-scan CloudWebApplication/
 
     - name: Configure AWS CLI
       run: |
