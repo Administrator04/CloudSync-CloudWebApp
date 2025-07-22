@@ -13,6 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set up CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: 'csharp'  
+
+    - name: Perform CodeQL analysis
+      uses: github/codeql-action/analyze@v2
+
     - name: Configure AWS CLI
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -45,16 +53,6 @@ jobs:
     - name: Configure kubectl to use EKS
       run: |
         aws eks update-kubeconfig --name CloudSync-Cluster --region us-east-1
-
-    - name: Install kube-score
-      run: |
-        curl -sSL https://github.com/zegl/kube-score/releases/download/v1.13.0/kube-score_1.13.0_linux_amd64.tar.gz | tar xz
-        sudo mv kube-score /usr/local/bin/
-
-    - name: DevSecOps - Scan Kubernetes manifests (e.g., deployment.yaml) for security issues
-      run: |
-        kubectl apply -f k8/deployment.yaml --dry-run=client -o yaml > deployment-dry-run.yaml
-        kube-score score deployment-dry-run.yaml
 
     - name: Delete and Redeploy to EKS (deployment.yaml)
       run: |
