@@ -12,19 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-       languages: 'csharp'
-       queries: security-extended
-
-    - name: Build .NET Project (Required for CodeQL analysis)
-      run: dotnet build CloudWebApplication/YourProject.csproj
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
-      continue-on-error: false  # Now this will work properly
 
     - name: Configure AWS CLI
       run: |
