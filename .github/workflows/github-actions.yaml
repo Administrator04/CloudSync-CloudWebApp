@@ -46,10 +46,15 @@ jobs:
       run: |
         aws eks update-kubeconfig --name CloudSync-Cluster --region us-east-1
 
+    - name: Install kube-score
+      run: |
+        curl -sSL https://github.com/zegl/kube-score/releases/download/v1.13.0/kube-score_1.13.0_linux_amd64.tar.gz | tar xz
+        sudo mv kube-score /usr/local/bin/
+
     - name: DevSecOps - Scan Kubernetes manifests (e.g., deployment.yaml) for security issues
       run: |
         kubectl apply -f k8/deployment.yaml --dry-run=client | kube-score score
-
+        
     - name: Delete and Redeploy to EKS (deployment.yaml)
       run: |
         kubectl delete -f k8/deployment.yaml || true
