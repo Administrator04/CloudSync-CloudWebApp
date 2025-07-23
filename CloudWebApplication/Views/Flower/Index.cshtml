@@ -2,34 +2,95 @@
     ViewData["Title"] = "Flower List";
 }
 
-@model List<Flower>
-<center>
-    <h1>Flowers List Information:</h1>
-    <br />
-    <table border="1"> 
-        <tr style="background-color: green;"> 
-            <th>Flower ID</th>
-            <th>Flower Name</th>
-            <th>Flower Type</th>
-            <th>Flower Produced Date</th>
-            <th>Flower Price</th>
-            <th>Delete Action</th>
-            <th>Update Action</th> 
-        </tr> 
-        @foreach (var flower in Model)
-        {
-        <tr> 
-            <td>@flower.flowerID</td> 
-            <td>@flower.flowerName</td>
-            <td>@flower.flowerType</td>
-            <td>@flower.flowerProducedDate</td> 
-            <td>@flower.flowerPrice</td> 
-            <form asp-action="DeleteData" asp-controller="Flower" asp-route-fid="@flower.flowerID"> <td><button>Delete</button></td> 
-                <td><button asp-action="EditData" asp-controller="Flower" asp-route-fid="@flower.flowerID">Edit</button></td>
-            </form> 
-        </tr>
-        } 
-        </table>
-    <p><a asp-action="AddData" asp-controller="Flower">Insert New Flower</a></p>
-</center>
+<style>
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
 
+        .table th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #28a745;
+            color: white;
+        }
+
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #dee2e6;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+    }
+
+    .btn {
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.25rem;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+</style>
+
+@model List<Flower>
+<div class="container">
+    <h1 class="text-center mb-4">Flowers List Information</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Flower ID</th>
+                    <th>Flower Name</th>
+                    <th>Flower Type</th>
+                    <th>Flower Produced Date</th>
+                    <th>Flower Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var flower in Model)
+                {
+                    <tr>
+                        <td>@flower.flowerID</td>
+                        <td>@flower.flowerName</td>
+                        <td>@flower.flowerType</td>
+                        <td>@flower.flowerProducedDate.ToShortDateString()</td>
+                        <td>@flower.flowerPrice.ToString("C")</td>
+                        <td class="d-flex justify-content-around">
+                            <form asp-action="EditData" asp-controller="Flower" asp-route-fid="@flower.flowerID" class="d-inline">
+                                <button class="btn btn-sm btn-primary">Edit</button>
+                            </form>
+                            <form asp-action="DeleteData" asp-controller="Flower" asp-route-fid="@flower.flowerID" class="d-inline">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="AddData" asp-controller="Flower" class="btn btn-success">Insert New Flower</a>
+    </div>
+</div>
