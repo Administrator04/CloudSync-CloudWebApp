@@ -1,43 +1,140 @@
 ﻿@{
-	ViewData["Title"] = "Modify Flower";
+    ViewData["Title"] = "Modify Flower";
 }
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .flower-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .form-input {
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.15s ease-in-out;
+    }
+
+        .form-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .currency-symbol {
+        padding: 0.75rem;
+        background-color: #e9ecef;
+        border: 1px solid #ced4da;
+        border-right: none;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .input-group .form-input {
+        border-radius: 0 4px 4px 0;
+        flex: 1;
+    }
+
+    .validation-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+    }
+
+    .submit-button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out;
+        width: 100%;
+    }
+
+    .update-button {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+        .update-button:hover {
+            background-color: #e0a800;
+        }
+
+    .form-actions {
+        margin-top: 1rem;
+    }
+</style>
 
 @model CloudWebApplication.Models.Flower
 
-<center>
-	<h1>Modify Existing Flower:</h1>
-	<form asp-action="UpdateData" asp-controller="Flower" method="post">
-		<input type="hidden" asp-for="flowerID" /> 
-		<table>
-			<tr>
-				<th><label asp-for="flowerName"></label> </th>
-				<td><input asp-for="flowerName" required /></td>
-				<td><span asp-validation-for="flowerName"></span></td>
-			</tr>
-			<tr>
-				<th><label asp-for="flowerType"></label> </th>
-				<td><input asp-for="flowerType" required /></td>
-				<td><span asp-validation-for="flowerType"></span></td>
-			</tr>
-			<tr>
-				<th><label asp-for="flowerProducedDate"></label> </th>
-				<td><input asp-for="flowerProducedDate" required /></td>
-				<td><span asp-validation-for="flowerProducedDate"></span></td>
-			</tr>
-			<tr>
-				<th><label asp-for="flowerPrice"></label> </th>
-				<td><input asp-for="flowerPrice" required /></td>
-				<td><span asp-validation-for="flowerPrice"></span></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" name="submit" value="Update Data to table" />
-				</td>
-			</tr>
-		</table>
+<div class="form-container">
+    <h1 class="form-title">Modify Flower</h1>
 
-	</form>
+    <form asp-action="UpdateData" asp-controller="Flower" method="post" class="flower-form">
+        <input type="hidden" asp-for="flowerID" />
 
-</center>
+        <div class="form-group">
+            <label asp-for="flowerName" class="form-label"></label>
+            <input asp-for="flowerName" class="form-input" required />
+            <span asp-validation-for="flowerName" class="validation-message"></span>
+        </div>
 
+        <div class="form-group">
+            <label asp-for="flowerType" class="form-label"></label>
+            <input asp-for="flowerType" class="form-input" required />
+            <span asp-validation-for="flowerType" class="validation-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="flowerProducedDate" class="form-label"></label>
+            <input asp-for="flowerProducedDate" type="date" class="form-input" required />
+            <span asp-validation-for="flowerProducedDate" class="validation-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="flowerPrice" class="form-label"></label>
+            <div class="input-group">
+                <span class="currency-symbol">RM</span>
+                <input asp-for="flowerPrice" type="number" step="0.01" class="form-input" required />
+            </div>
+            <span asp-validation-for="flowerPrice" class="validation-message"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-button update-button">Update Flower</button>
+        </div>
+    </form>
+</div>
 
