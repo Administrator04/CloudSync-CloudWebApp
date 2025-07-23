@@ -1,8 +1,205 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To CloudWebApplication Testing Again Here!</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* Base Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(to right, #f8f9fa, #e9f5f9);
+        padding: 3rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 2rem;
+    }
+
+    .hero-image {
+        margin: 2rem auto;
+        max-width: 200px;
+    }
+
+    .flower-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #218838;
+        }
+
+    .btn-secondary {
+        background-color: white;
+        border: 1px solid #28a745;
+        color: #28a745;
+    }
+
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+        }
+
+    /* Features Section */
+    .features-section {
+        padding: 3rem 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+        .features-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        color: #28a745;
+        margin-bottom: 0.5rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background-color: #28a745;
+        color: white;
+        padding: 3rem 1rem;
+        text-align: center;
+    }
+
+    .cta-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-success {
+        background-color: white;
+        color: #28a745;
+        border: 1px solid white;
+    }
+
+        .btn-success:hover {
+            background-color: #f8f9fa;
+        }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 768px) {
+        .display-4 {
+            font-size: 2rem;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="display-4">Welcome to Flower Manager</h1>
+        <p class="tagline">Cultivate your flower database with ease</p>
+        <div class="hero-image">
+            <img src="https://cdn.pixabay.com/photo/2018/01/29/07/11/flower-3115353_640.png" alt="Flower illustration" class="flower-img">
+        </div>
+        <div class="hero-buttons">
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    </div>
 </div>
+
+<div class="features-section">
+    <h2>Flower Management Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🌷</div>
+            <h3>Flower Catalog</h3>
+            <p>Track all your flowers in one organized system</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Production Dates</h3>
+            <p>Monitor when each flower was produced</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Pricing Control</h3>
+            <p>Manage your flower pricing effectively</p>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <div class="cta-content">
+        <h2>Ready to start managing your flowers?</h2>
+        <a class="btn btn-success" asp-controller="Flower" asp-action="Index">View Flower Database</a>
+    </div>
+</div>
+
