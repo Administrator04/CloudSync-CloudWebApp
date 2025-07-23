@@ -75,7 +75,7 @@
                         <td>@flower.flowerName</td>
                         <td>@flower.flowerType</td>
                         <td>@flower.flowerProducedDate.ToShortDateString()</td>
-                        <td>@flower.flowerPrice.ToString("C")</td>
+                        <td>RM @flower.flowerPrice.ToString("0.00")</td>
                         <td class="d-flex justify-content-around">
                             <form asp-action="EditData" asp-controller="Flower" asp-route-fid="@flower.flowerID" class="d-inline">
                                 <button class="btn btn-sm btn-primary">Edit</button>
