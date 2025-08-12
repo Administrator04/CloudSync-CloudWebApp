@@ -15,7 +15,7 @@
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\PC\source\repos\CloudWebApplication\CloudWebApplication\Properties\PublishProfiles\988732826295.dkr.ecr.us-east-1.amazonaws.com_cloudsync_webapp.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\PC\source\repos\CloudWebApplication\CloudWebApplication\Properties\PublishProfiles\133131934765.dkr.ecr.us-east-1.amazonaws.com_cloudsync_webapp.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

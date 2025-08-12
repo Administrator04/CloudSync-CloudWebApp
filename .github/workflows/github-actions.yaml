@@ -28,15 +28,15 @@ jobs:
 
     - name: Login to ECR 
       run: |
-        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 073520217001.dkr.ecr.us-east-1.amazonaws.com
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 133131934765.dkr.ecr.us-east-1.amazonaws.com
 
     - name: Build and tag Docker image
       run: |
         docker build -t cloudsync/webapp -f CloudWebApplication/Dockerfile .
-        docker tag cloudsync/webapp:latest 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+        docker tag cloudsync/webapp:latest 133131934765.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
     - name: Push to ECR
-      run: docker push 073520217001.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+      run: docker push 133131934765.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
 
     - name: Set up kubectl
       uses: aws-actions/configure-aws-credentials@v1
