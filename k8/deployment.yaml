@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: cloudwebapplication
-        image: 133131934765.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
+        image: 140013277928.dkr.ecr.us-east-1.amazonaws.com/cloudsync/webapp:latest
         ports:
         - containerPort: 8080
